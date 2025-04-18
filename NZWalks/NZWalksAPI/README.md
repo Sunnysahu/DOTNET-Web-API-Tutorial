@@ -1,6 +1,1 @@
-﻿namespace NZWalksAPI
-{
-    public class README
-    {
-    }
-}
+﻿# Hello Guys, This is a Web API Project
