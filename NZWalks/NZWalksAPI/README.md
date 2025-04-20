@@ -50,5 +50,5 @@ public class NZWalksDbContext : DbContext
 
         public DbSet<Walk> Walks { get; set; }
     }
-    ```
-### 6. Add the Connection String
+```
+6. Add the Connection String
