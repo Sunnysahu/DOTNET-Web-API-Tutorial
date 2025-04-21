@@ -34,23 +34,22 @@ Microsoft.EntityFrameworkCore.Tools
 
 Add the `DbSet` properties for each of the domain models. Add Code Similar to This : 
 
-  
-        public class NZWalksDbContext : DbContext
-            {
+```
+ public class NZWalksDbContext: DbContext 
+ {
 
-                public NZWalksDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
-                {
+   public NZWalksDbContext(DbContextOptions dbContextOptions): base(dbContextOptions) 
+   {
 
-           
-            
-                }
+   }
 
-                public DbSet<Difficulty> Difficulties { get; set; }
+   public DbSet <Difficulty> Difficulties {get; set;}
 
-                public DbSet<Region> Regions { get; set; }
+   public DbSet <Region> Regions {get; set;}
 
-                public DbSet<Walk> Walks { get; set; }
-            }
+   public DbSet <Walk> Walks {get; set;}
+ }
+```
     
 
 ### 6. Add the Connection String
@@ -95,6 +94,7 @@ public class MyConrtoller: ConrollerBase {
   public IActionResult Index() 
   {
     var data = _service.GetData();
+
     return Ok(data);
   }
 }      
