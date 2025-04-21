@@ -73,12 +73,11 @@ Add the `DbSet` properties for each of the domain models. Add Code Similar to Th
 
 > 🧠 Real-Life Analogy: A Car doesn’t build its own engine. The engine is installed from outside (dependency). This way, you can install any type of engine without changing the car's logic.
 ---------------------------------------------------------------------------------
-
-| Benefit                   | Description |
------------------------------------------------------------------------------------------------|
-| ✅ Loose coupling         | Class depends on abstractions (interfaces), not concrete classes.|
-| ✅ Easier testing         | You can inject mock dependencies during testing.|
-| ✅ Better maintainability | Changes in one class don't ripple across the system. |
+| Benefit                 | Description                                                             |
+|-------------------------|-------------------------------------------------------------------------|
+| ✅ Loose coupling        | Class depends on abstractions (interfaces), not concrete classes.       |
+| ✅ Easier testing        | You can inject mock dependencies during testing.                        |
+| ✅ Better maintainability| Changes in one class don't ripple across the system.                    |
 
 - Example 
 ```
