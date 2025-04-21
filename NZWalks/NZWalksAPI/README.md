@@ -100,7 +100,8 @@ public class MyConrtoller: ConrollerBase {
 }      
 ```
 
- How to do it with Dependency Injection --> o Program.cs file and add 
+ How to do it with Dependency Injection --> Program.cs file and add 
+
      ```
      services.AddScoped<IMyService, MyService>();
      ```
@@ -114,6 +115,7 @@ public class MyConrtoller: ConrollerBase {
  By this we are telling the application to use the `NZWalksDbContext` class and use the connection string from the `appsettings.json` file.
 
 ### 8. Add the Migrations
+
 - Open the NuGet Package Manager Console and run the following commands:
     ```
     Add-Migration "<Name_of_Migration>"
