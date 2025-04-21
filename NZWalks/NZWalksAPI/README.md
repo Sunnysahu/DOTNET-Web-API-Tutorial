@@ -82,7 +82,7 @@ Add the `DbSet` properties for each of the domain models. Add Code Similar to Th
 | ✅ Better maintainability | Changes in one class don't ripple across the system. |
 
 - Example 
-    ```
+```
         public class MyConrtoller : ConrollerBase
         {
             private readonly MyService _service;
@@ -98,7 +98,7 @@ Add the `DbSet` properties for each of the domain models. Add Code Similar to Th
                 return Ok(data);
             }
         }
-     ```
+ ```
 
  How to do it with Dependency Injection --> o Program.cs file and add 
 
