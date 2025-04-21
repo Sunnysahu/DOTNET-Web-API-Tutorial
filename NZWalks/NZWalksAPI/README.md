@@ -105,8 +105,7 @@ Microsoft.EntityFrameworkCore.Tools
 - Open the `Program.cs` file and add the following code to the `builder.Services` section:
 ```csharp
 
-        builder.Services.AddDbContext<NZWalksDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStringName")));
+    builder.Services.AddDbContext<NZWalksDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStringName")));
 
 ```
  By this we are telling the application to use the `NZWalksDbContext` class and use the connection string from the `appsettings.json` file.
