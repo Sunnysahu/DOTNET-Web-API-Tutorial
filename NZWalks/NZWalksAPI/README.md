@@ -51,10 +51,11 @@ Microsoft.EntityFrameworkCore.Tools
 
                 public DbSet<Walk> Walks { get; set; }
             }
- ```
+    ```
 
 ### 6. Add the Connection String
-- Open the `appsettings.json` file and add a connection string below the `AllowedHost`.
+  - Open the `appsettings.json` file and add a connection string below the `AllowedHost`.
+
     ```
     {
       "ConnectionStrings": {
