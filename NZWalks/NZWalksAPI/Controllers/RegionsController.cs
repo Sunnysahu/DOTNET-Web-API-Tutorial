@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NZWalksAPI.Data;
 using NZWalksAPI.Models.Domain;
 
 namespace NZWalksAPI.Controllers
@@ -11,27 +12,19 @@ namespace NZWalksAPI.Controllers
     public class RegionsController : ControllerBase
     {
 
+        private readonly NZWalksDbContext dbContext;
+
+        public RegionsController(NZWalksDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         [HttpGet] // This attribute indicates that this method will respond to HTTP GET requests.
         public IActionResult GetAll()
         {
-            var region = new List<Region>
-            {
-                new Region
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Jamshedpur",
-                    Code = "JAM",
-                    RegionImageUrl = "https://s7ap1.scene7.com/is/image/incredibleindia/jubilee%20Park-jamshedpur-jharkhand-hero?qlt=82&ts=1726724218264"
-                },
-                new Region
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Shahdol",
-                    Code = "SHD",
-                    RegionImageUrl = "https://captureatrip-cms-storage.s3.ap-south-1.amazonaws.com/Jubilee_Park_2d81800cdc.webp"
-                }
-            };
-            return Ok(region);
+            var regions = dbContext.Regions.ToList(); // Fetches all regions from the database. 
+
+            return Ok(regions);
         }
     }
 }

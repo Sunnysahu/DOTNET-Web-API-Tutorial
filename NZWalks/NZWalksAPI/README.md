@@ -128,3 +128,14 @@ Add the `DbSet` properties for each of the domain models. Add Code Similar to Th
 
 ### 9. CRUD Operation Regions Table
 - Create a new folder `Controllers` and add a new class `RegionsController.cs`.
+- Create a constructor and inject the `NZWalksDbContext` class. This is Called Constructor Injection (CI);
+- To get result from DB, use Db Context to insert Data and Retreive Data. We can use Db Context Here as we did a Dependency Injection in `Program.cs` file 
+- Create a Private variable (named `dbContext`)and from constructor assign the value to it.
+- Now use that `dbConext` to access Data from MySQL Server.
+> Just to check, manually insert the data in the `Regions` table using SQL Server Management Studio
+
+```
+Insert into regions ([Id], [Code], [Name], [RegionImageUrl]) values ('0622bc15-72f1-48be-b44d-bf25fb874eee', 'JSR', 'Jamshedpur', 'https://captureatrip-cms-storage.s3.ap-south-1.amazonaws.com/Jubilee_Park_2d81800cdc.webp');
+```
+
+- Now, Implement Get Region by Id Action Method
