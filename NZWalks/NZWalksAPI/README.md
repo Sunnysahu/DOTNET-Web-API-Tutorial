@@ -51,7 +51,7 @@ Microsoft.EntityFrameworkCore.Tools
             public DbSet<Walk> Walks { get; set; }
         }
     ```
-6. Add the Connection String
+### 6. Add the Connection String
 - Open the `appsettings.json` file and add a connection string below the `AllowedHost`.
     ```
     {
@@ -60,4 +60,46 @@ Microsoft.EntityFrameworkCore.Tools
       }
     }
     ```
-- 
+
+### 7. Add the Connection String to the DbContext (Dependency Injection)
+---------------------------------------------------------------------------------
+> Dependency Injection is a design pattern used to achieve Inversion of Control (IoC) between classes and their dependencies.
+
+> Instead of a class creating its dependencies, they are provided (injected) from the outside.
+
+> DI works on this fundamental that instead of instantiating objects within a class those objects are passed in as parameters to the class like passing it to the constructor or the method instead.
+
+> 🧠 Real-Life Analogy: A Car doesn’t build its own engine. The engine is installed from outside (dependency). This way, you can install any type of engine without changing the car's logic.
+---------------------------------------------------------------------------------
+
+| Benefit                   | Description |
+-----------------------------------------------------------------------------------------------|
+| ✅ Loose coupling         | Class depends on abstractions (interfaces), not concrete classes.|
+| ✅ Easier testing         | You can inject mock dependencies during testing.|
+| ✅ Better maintainability | Changes in one class don't ripple across the system. |
+
+- Example 
+    ```
+        public class MyConrtoller : ConrollerBase
+        {
+            private readonly MyService _service;
+
+            public MyController()
+            {
+                _service = new MyService();
+            }
+
+            public IActionResult Index()
+            {
+                var data = _service.GetData();
+                return Ok(data);
+            }
+        }
+        
+        
+     ```
+
+ How to do it with Dependency Injection --> o Program.cs file and add 
+
+     services.AddScoped<IMyService, MyService>();
+    
