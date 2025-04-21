@@ -111,3 +111,14 @@ Microsoft.EntityFrameworkCore.Tools
  By this we are telling the application to use the `NZWalksDbContext` class and use the connection string from the `appsettings.json` file.
 
 ### 8. Add the Migrations
+- Open the NuGet Package Manager Console and run the following commands:
+    ```
+    Add-Migration "<Name_of_Migration>"
+    ```
+- You Will have the new `Migration Folder` Created and Some Files with out Specified Name in it.
+- Now run the Migration, as we don't have anyting and after running A `Database` will be created in the SQL Server with the name you provided in the connection string.
+- 
+    ```
+    Update-Database
+    ```
+- You can check the database in the SQL Server Management Studio.
