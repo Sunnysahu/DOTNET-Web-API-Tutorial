@@ -122,3 +122,6 @@ Microsoft.EntityFrameworkCore.Tools
     Update-Database
     ```
 - You can check the database in the SQL Server Management Studio.
+
+### 9. CRUD Operation Regions Table
+- Create a new folder `Controllers` and add a new class `RegionsController.cs`.
