@@ -33,22 +33,31 @@ Microsoft.EntityFrameworkCore.Tools
 > A DbSet<T> in Entity Framework (EF) or EF Core is a property within a DbContext class that represents a collection of entities of type T, corresponding to a database table. It enables querying, adding, updating, and deleting records using LINQ, with changes tracked by the DbContext.
 
 - Add the `DbSet` properties for each of the domain models. Add Code Similar to This : 
-```
-public class NZWalksDbContext : DbContext
-    {
-
-        public NZWalksDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+    ```
+    public class NZWalksDbContext : DbContext
         {
+
+            public NZWalksDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+            {
 
            
             
+            }
+
+            public DbSet<Difficulty> Difficulties { get; set; }
+
+            public DbSet<Region> Regions { get; set; }
+
+            public DbSet<Walk> Walks { get; set; }
         }
-
-        public DbSet<Difficulty> Difficulties { get; set; }
-
-        public DbSet<Region> Regions { get; set; }
-
-        public DbSet<Walk> Walks { get; set; }
-    }
-```
+    ```
 6. Add the Connection String
+- Open the `appsettings.json` file and add a connection string below the `AllowedHost`.
+    ```
+    {
+      "ConnectionStrings": {
+        "<Conn.String__Name>": "Server=YOUR__SERVER_NAME;Database=YOUR_DB_NAME;Trusted_Connection=True;TrustServerCertificate=True;"
+      }
+    }
+    ```
+- 
