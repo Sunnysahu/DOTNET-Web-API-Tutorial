@@ -83,22 +83,22 @@ Add the `DbSet` properties for each of the domain models. Add Code Similar to Th
 
 - Example 
 ```
-        public class MyConrtoller : ConrollerBase
-        {
-            private readonly MyService _service;
+public class MyConrtoller: ConrollerBase {
 
-            public MyController()
-            {
-                _service = new MyService();
-            }
+  private readonly MyService _service;
 
-            public IActionResult Index()
-            {
-                var data = _service.GetData();
-                return Ok(data);
-            }
-        }
- ```
+  public MyController() 
+  {
+    _service = new MyService();
+  }
+
+  public IActionResult Index() 
+  {
+    var data = _service.GetData();
+    return Ok(data);
+  }
+}      
+```
 
  How to do it with Dependency Injection --> o Program.cs file and add 
 
