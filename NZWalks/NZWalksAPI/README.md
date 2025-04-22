@@ -170,7 +170,7 @@ Insert into regions ([Id], [Code], [Name], [RegionImageUrl]) values ('0622bc15-7
  ```
  <hr/>
 
-### DTOs vd Domain Model
+### DTOs vs Domain Model
 
 <img src="./Assets/DTO vs DM.jpg" alt="My Image" />
 
