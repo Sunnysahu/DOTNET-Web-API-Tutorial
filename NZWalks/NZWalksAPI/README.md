@@ -29,6 +29,8 @@ Microsoft.EntityFrameworkCore.Tools
 - Inherit the `DbContext` class. Use ctrl + . for importing the entity framework core.
 - Create a Constructor, using `ctor`, Pass the DbContextOptions and Some Name.
 
+<hr/>
+
 ### 5. Add the DbSet Properties
 > A DbSet<T> in Entity Framework (EF) or EF Core is a property within a DbContext class that represents a collection of entities of type T, corresponding to a database table. It enables querying, adding, updating, and deleting records using LINQ, with changes tracked by the DbContext.
 
@@ -50,7 +52,8 @@ Add the `DbSet` properties for each of the domain models. Add Code Similar to Th
    public DbSet <Walk> Walks {get; set;}
  }
 ```
-    
+ 
+<hr/>
 
 ### 6. Add the Connection String
   - Open the `appsettings.json` file and add a connection string below the `AllowedHost`.
@@ -114,7 +117,9 @@ public class MyConrtoller: ConrollerBase {
 
     ```
  By this we are telling the application to use the `NZWalksDbContext` class and use the connection string from the `appsettings.json` file.
+
  <hr/>
+
 ### 8. Add the Migrations
 
 - Open the NuGet Package Manager Console and run the following commands:
@@ -129,6 +134,7 @@ public class MyConrtoller: ConrollerBase {
     ```
 - You can check the database in the SQL Server Management Studio.
 <hr/>
+
 ### 9. CRUD Operation Regions Table
 - Create a new folder `Controllers` and add a new class `RegionsController.cs`.
 - Create a constructor and inject the `NZWalksDbContext` class. This is Called Constructor Injection (CI);
@@ -163,6 +169,7 @@ Insert into regions ([Id], [Code], [Name], [RegionImageUrl]) values ('0622bc15-7
   var region = dbContext.Regions.FirstOrDefault(x => x.Id == id);
  ```
  <hr/>
+
 ### DTOs vd Domain Model
 
 <img src="./Assets/DTO vs DM.jpg" alt="My Image" />
