@@ -62,6 +62,8 @@ Add the `DbSet` properties for each of the domain models. Add Code Similar to Th
       }
     }
     ```
+ 
+<hr/>
 
 ### 7. Add the Connection String to the DbContext (Dependency Injection)
 ---------------------------------------------------------------------------------
@@ -112,7 +114,7 @@ public class MyConrtoller: ConrollerBase {
 
     ```
  By this we are telling the application to use the `NZWalksDbContext` class and use the connection string from the `appsettings.json` file.
-
+ <hr/>
 ### 8. Add the Migrations
 
 - Open the NuGet Package Manager Console and run the following commands:
@@ -126,7 +128,7 @@ public class MyConrtoller: ConrollerBase {
     Update-Database
     ```
 - You can check the database in the SQL Server Management Studio.
-
+<hr/>
 ### 9. CRUD Operation Regions Table
 - Create a new folder `Controllers` and add a new class `RegionsController.cs`.
 - Create a constructor and inject the `NZWalksDbContext` class. This is Called Constructor Injection (CI);
@@ -140,3 +142,81 @@ Insert into regions ([Id], [Code], [Name], [RegionImageUrl]) values ('0622bc15-7
 ```
 
 - Now, Implement Get Region by Id Action Method
+
+> Tip : Use [FromRoute] when:
+
+    Parameter name ≠ route token
+
+    You want code to be clear and explicit
+
+    There are multiple sources (e.g., [FromBody], [FromQuery], [FromHeader], [FromX] etc.)
+
+ if you name the parameter differently:
+ ```csharp
+ [HttpGet("{regionId}")]
+ public IActionResult GetById([FromRoute(Name = "regionId")] Guid id)
+ ```
+ You must use [FromRoute] here, or the binding will fail because regionId ≠ id.
+
+ You can also use `LINQ` Query to do this by using this Code : 
+ ```
+  var region = dbContext.Regions.FirstOrDefault(x => x.Id == id);
+ ```
+ <hr/>
+### DTOs vd Domain Model
+
+<img src="./Assets/DTO vs DM.jpg" alt="My Image" />
+
+> DM --> A domain model represents the actual data and behavior in your application — the "real" structure of your business logic. It contains all fields and methods that define how your system works.
+
+🔧 Real-Life Example:
+Imagine you’re building an Employee Management System.
+A domain model might look like this:
+
+```
+public class Employee
+{
+    public Guid Id { get; set; }
+    public string FullName { get; set; }
+    public string Email { get; set; }
+    public decimal Salary { get; set; }
+    public string Role { get; set; }
+
+    public bool IsManager()
+    {
+        return Role == "Manager";
+    }
+}
+```
+This model contains everything about the employee — even things like salary, which may be sensitive.
+
+> DTO -->  A DTO is a lightweight object that is used to transfer data between layers (e.g., from your backend to frontend or API). It contains only the necessary information, and usually no logic.
+<hr/>
+
+💡 Real-Life Example:
+
+Let’s say you’re showing a public employee profile on a website. You don’t want to show the salary or internal ID.
+
+A DTO might look like this:
+```
+public class EmployeeDto
+{
+    public string FullName { get; set; }
+    public string Role { get; set; }
+}
+```
+This way, you’re not exposing sensitive data like Salary or Email to the outside world. It’s safer and cleaner.
+
+✅ Why use both?
+Use Domain Model inside your application (business logic, DB interaction).
+
+Use DTOs to send/receive data through APIs or UI — keeping it simple, secure, and minimal.
+🔄 Mapping between Domain and DTO:
+```
+var dto = new EmployeeDto
+{
+    FullName = employee.FullName,
+    Role = employee.Role
+};
+```
+
