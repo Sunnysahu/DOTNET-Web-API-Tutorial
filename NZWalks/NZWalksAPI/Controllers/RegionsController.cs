@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NZWalksAPI.Data;
+using NZWalksAPI.DTO;
 using NZWalksAPI.Models.Domain;
 
 namespace NZWalksAPI.Controllers
@@ -22,9 +23,25 @@ namespace NZWalksAPI.Controllers
         [HttpGet] // This attribute indicates that this method will respond to HTTP GET requests.
         public IActionResult GetAll()
         {
-            var regions = dbContext.Regions.ToList(); // Fetches all regions from the database. 
+            // Get Data from the database -- Domain Models.
 
-            return Ok(regions);
+            var regionsDomain = dbContext.Regions.ToList(); // Fetches all regions from the database. 
+
+            // Map Domain Models to DTOs
+            var regionsDto = new List<RegionDto>(); // Create a new list to hold the mapped DTOs.
+            foreach (var regionDomain in regionsDomain)
+            {
+                regionsDto.Add(new RegionDto()
+                {
+                    Id = regionDomain.Id,
+                    Code = regionDomain.Code,
+                    Name = regionDomain.Name,
+                    RegionImageUrl = regionDomain.RegionImageUrl
+                });
+            }
+
+            // Return DTOs (Never Return back Domain Model to the Client)
+            return Ok(regionsDto);
         }
         
         // GET Signle Region or GET Region by ID
@@ -35,13 +52,25 @@ namespace NZWalksAPI.Controllers
         {
             // var region = dbContext.Regions.Find(id); // Fetches a single region by its ID from the database.
 
-            var region = dbContext.Regions.FirstOrDefault(x => x.Id == id); // LINQ Code --> Fetches a single region by its ID from the database.
+            var regionDomain = dbContext.Regions.FirstOrDefault(x => x.Id == id); // LINQ Code --> Fetches a single region by its ID from the database.
 
-            if (region == null)
+            if (regionDomain == null)
             {
                 return NotFound(); 
             }
-            return Ok(region); 
+
+            // Map/ Convert Region Domain Mode to Region DTO
+
+            var regionDto = new RegionDto()
+            {
+                Id = regionDomain.Id,
+                Code = regionDomain.Code,
+                Name = regionDomain.Name,
+                RegionImageUrl = regionDomain.RegionImageUrl
+            };
+
+            
+            return Ok(regionDto); 
         }
     }
 }

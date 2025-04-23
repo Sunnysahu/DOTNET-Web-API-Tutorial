@@ -226,4 +226,15 @@ var dto = new EmployeeDto
     Role = employee.Role
 };
 ```
+> Till now we're getting all the region back and we're sending the Domain Mode back to client (swagger). This is coupling of the Domain Model to the API View Layer. 
 
+> We've to convert Domain Model to DTOs and Expose DTOs to the outside model instead.
+
+- Get Data from the database -- Domain Models.
+- Map Domain Models to DTOs
+- Return DTOs (Never Return back Domain Model to the Client)
+
+### 10. DTO Setup
+
+- Create a `DTO` Folder and Inside that create a `RegionDto.cs` file.
+- Create a class `RegionDto` and add the properties you want to expose to the client.
