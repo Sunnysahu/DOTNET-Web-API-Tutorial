@@ -43,7 +43,7 @@ namespace NZWalksAPI.Controllers
             // Return DTOs (Never Return back Domain Model to the Client)
             return Ok(regionsDto);
         }
-        
+
         // GET Signle Region or GET Region by ID
         // http://localhost:1234/api/regions/{id}
         [HttpGet]
@@ -56,7 +56,7 @@ namespace NZWalksAPI.Controllers
 
             if (regionDomain == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
             // Map/ Convert Region Domain Mode to Region DTO
@@ -69,8 +69,8 @@ namespace NZWalksAPI.Controllers
                 RegionImageUrl = regionDomain.RegionImageUrl
             };
 
-            
-            return Ok(regionDto); 
+
+            return Ok(regionDto);
         }
 
         [HttpPost] // This attribute indicates that this method will respond to HTTP POST requests.
@@ -102,6 +102,40 @@ namespace NZWalksAPI.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = regionDto.Id }, regionDto);
 
+        }
+
+        // http://localhost:portnmber/api/region/{guid}
+        [HttpPut] // This attribute indicates that this method will respond to HTTP PUT requests.
+        [Route("{id:Guid}")] // This attribute defines the route for this specific action method. The {id} token will be replaced with the actual ID value passed in the URL.
+        public IActionResult Update([FromRoute] Guid id, [FromBody] UpdateRegionRequestDto updateRegionRequestDto )
+        {
+            // Fetch the region from the database
+            var regionDomainModel =  dbContext.Regions.FirstOrDefault(x => x.Id == id); // LINQ Code --> Fetches a single region by its ID from the database.
+
+            if (regionDomainModel == null)
+            {
+                return NotFound();
+            }
+
+            // Map/Convert UpdateRegionRequestDto to Region Domain Model
+
+            regionDomainModel.Code = updateRegionRequestDto.Code;
+            regionDomainModel.Name = updateRegionRequestDto.Name;
+            regionDomainModel.RegionImageUrl = updateRegionRequestDto.RegionImageUrl;
+
+            dbContext.SaveChanges(); // Save the changes to the database.
+
+            // Map/Convert Region Domain Model to Region DTO
+
+            var regionDto = new RegionDto()
+            {
+                Id = regionDomainModel.Id,
+                Code = regionDomainModel.Code,
+                Name = regionDomainModel.Name,
+                RegionImageUrl = regionDomainModel.RegionImageUrl
+            };
+
+            return Ok(regionDto);
         }
     }
 }
