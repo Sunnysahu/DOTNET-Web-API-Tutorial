@@ -12,7 +12,9 @@ namespace NZWalksAPI.Data
            
             
         }
-
+        // These 3 Representing Tables in the SQL Server
+        // Now we need columns, so we need to create properties for each of the tables
+        // 
         public DbSet<Difficulty> Difficulties { get; set; }
 
         public DbSet<Region> Regions { get; set; }
