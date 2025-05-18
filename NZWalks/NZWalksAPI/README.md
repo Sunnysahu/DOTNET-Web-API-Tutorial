@@ -238,3 +238,31 @@ var dto = new EmployeeDto
 
 - Create a `DTO` Folder and Inside that create a `RegionDto.cs` file.
 - Create a class `RegionDto` and add the properties you want to expose to the client.
+
+----------------------------------------------------------------------------
+
+### 11. Asynchronous Programming
+> Asynchronous programming is a programming paradigm that allows a program to perform tasks concurrently without blocking the main thread. It enables non-blocking operations, improving responsiveness and performance, especially in I/O-bound applications.
+
+> In C#, asynchronous programming is primarily achieved using the `async` and `await` keywords, allowing methods to run in the background while the main thread continues executing other tasks.
+
+> This is useful for tasks like file I/O, network requests, and database operations, where waiting for a response can lead to inefficiencies.
+
+- Use `async` and `await` keywords in your methods to make them asynchronous.
+
+- Change the return type of your methods to `Task<IActionResult>` instead of `IActionResult`.
+- Use `await` when calling asynchronous methods, such as `ToListAsync()` or `FirstOrDefaultAsync()`, to ensure the method waits for the result without blocking the main thread.
+- Example:
+    ```
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync()
+    {
+        var regions = await dbContext.Regions.ToListAsync();
+        return Ok(regions);
+    }
+    ```
+
+
+
+
+### 12. AutoMapper
