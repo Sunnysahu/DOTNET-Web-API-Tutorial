@@ -18,7 +18,7 @@ and
 Microsoft.EntityFrameworkCore.Tools 
 ```
 ### 4. Create a Db Context Class
-> The `DbContext` class in Entity Framework and EF Core connects your .NET application to the database, managing connections, mapping entities to tables via `DbSet<T>`, and enabling CRUD operations. It supports LINQ queries, tracks changes, and persists data with `SaveChanges`, simplifying database interactions and boosting productivity.
+> A DbContext class in Entity Framework (EF) or EF Core is a central class that manages the database connection and serves as a bridge between your domain models and the database. It provides methods for querying and saving data, tracking changes, and managing transactions.
 
 >It also Acts as a Bridge b/w Domain Model and Database.
 
