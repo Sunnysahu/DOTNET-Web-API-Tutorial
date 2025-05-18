@@ -252,6 +252,7 @@ var dto = new EmployeeDto
 
 - Change the return type of your methods to `Task<IActionResult>` instead of `IActionResult`.
 - Use `await` when calling asynchronous methods, such as `ToListAsync()` or `FirstOrDefaultAsync()`, to ensure the method waits for the result without blocking the main thread.
+- Import the `Microsoft.EntityFrameworkCore` namespace to access the asynchronous methods provided by Entity Framework Core.
 - Example:
     ```
     [HttpGet]
