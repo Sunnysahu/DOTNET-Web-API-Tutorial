@@ -137,5 +137,32 @@ namespace NZWalksAPI.Controllers
 
             return Ok(regionDto);
         }
+
+        [HttpDelete] // This attribute indicates that this method will respond to HTTP DELETE requests.
+        [Route("{id:guid}")] // This attribute defines the route for this specific action method. The {id} token will be replaced with the actual ID value passed in the URL.
+        public IActionResult Delete([FromRoute] Guid id)
+        {
+            var regionDomainModel =  dbContext.Regions.FirstOrDefault(x => x.Id == id);
+
+            if(regionDomainModel == null)
+            {
+                return NotFound();
+            }
+
+            dbContext.Regions.Remove(regionDomainModel); // Remove the region from the database context.
+            dbContext.SaveChanges();
+
+            // Map/Convert Region Domain Model to Region DTO
+
+            var regionDto = new RegionDto()
+            {
+                Id = regionDomainModel.Id,
+                Code = regionDomainModel.Code,
+                Name = regionDomainModel.Name,
+                RegionImageUrl = regionDomainModel.RegionImageUrl
+            };
+            return Ok(regionDto); // Return the deleted region as a response.
+
+        }
     }
 }
