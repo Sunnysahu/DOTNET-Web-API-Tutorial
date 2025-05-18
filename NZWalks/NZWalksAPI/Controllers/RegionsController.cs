@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NZWalksAPI.Data;
 using NZWalksAPI.DTO;
 using NZWalksAPI.Models.Domain;
@@ -21,11 +22,11 @@ namespace NZWalksAPI.Controllers
         }
 
         [HttpGet] // This attribute indicates that this method will respond to HTTP GET requests.
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll() // This method is an asynchronous action that returns a list of all regions.
         {
             // Get Data from the database -- Domain Models.
 
-            var regionsDomain = dbContext.Regions.ToList(); // Fetches all regions from the database. 
+            var regionsDomain = await dbContext.Regions.ToListAsync(); // Fetches all regions from the database. 
 
             // Map Domain Models to DTOs
             var regionsDto = new List<RegionDto>(); // Create a new list to hold the mapped DTOs.
