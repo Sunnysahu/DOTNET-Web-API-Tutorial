@@ -106,9 +106,9 @@ public class MyConrtoller: ConrollerBase {
 
  How to do it with Dependency Injection --> Program.cs file and add 
 
-     ```
+     
      services.AddScoped<IMyService, MyService>();
-     ```
+     
 
 - Open the `Program.cs` file and add the following code to the `builder.Services` section:
     ```csharp
