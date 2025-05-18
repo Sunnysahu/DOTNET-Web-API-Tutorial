@@ -45,7 +45,7 @@ namespace NZWalksAPI.Controllers
             return Ok(regionsDto);
         }
 
-        // GET Signle Region or GET Region by ID
+        // GET Single Region or GET Region by ID
         // http://localhost:1234/api/regions/{id}
         [HttpGet]
         [Route("{id:Guid}")] // This attribute defines the route for this specific action method. The {id} token will be replaced with the actual ID value passed in the URL.
