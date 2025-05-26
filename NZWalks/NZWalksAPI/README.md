@@ -380,5 +380,54 @@ Steps yo Do it in the Project:
 
     > use `ctrl` + `.` to import the interface.
 1. Inject the `NZWalksDbContext` into the `RegionRepository` constructor.
-1. 
+    ```
+    public class SQLRegionRepository : IRegionRepository
+    {
+        private readonly NZWalksDbContext dbContext;
+
+        public SQLRegionRepository(NZWalksDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+        public async Task<List<Region>> GetAllAsync()
+        {
+            return await dbContext.Regions.ToListAsync(); // Fetches all regions from the database asynchronously.
+        }
+
+        // Additional methods for CRUD operations can be added here, such as GetByIdAsync, AddAsync, UpdateAsync, DeleteAsync, etc.
+
+    }
+    ```
+1. Implement the methods in the `SQLRegionRepository` class using the `dbContext` to perform CRUD operations.
+    ```
+    public async Task<List<Region>> GetAllAsync()
+        {
+            return await dbContext.Regions.ToListAsync(); // Fetches all regions from the database asynchronously.
+        }
+    ```
+1. In the `Program.cs` file, register the repository with the dependency injection container using `services.AddScoped<IRegionRepository, SQLRegionRepository>();`.
+In the `RegionsController`, inject the `IRegionRepository` instead of `NZWalksDbContext` and use it to perform operations.
+   ```
+    builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>();
+    ```
+1. In the `RegionsController`, inject the `IRegionRepository` instead of `NZWalksDbContext` and use it to perform operations.
+    ```
+    public class RegionsController : ControllerBase
+    {
+        private readonly IRegionRepository regionRepository;
+        public RegionsController(IRegionRepository regionRepository)
+        {
+            this.regionRepository = regionRepository;
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsync()
+        {
+            var regions = await regionRepository.GetAllAsync();
+            return Ok(regions);
+        }
+    }
+    ```
+1. Now, you can use the `IRegionRepository` in your controller to perform CRUD operations on regions without directly accessing the `NZWalksDbContext`. This promotes separation of concerns and makes your code cleaner and more maintainable.
+1. You can now implement other methods like `GetByIdAsync`, `AddAsync`, `UpdateAsync`, and `DeleteAsync` in the `SQLRegionRepository` class, following the same pattern as shown above.
+1. You can also create similar repositories for other domain models like `Difficulty` and `Walk` by following the same steps.
 ### 12. AutoMapper
