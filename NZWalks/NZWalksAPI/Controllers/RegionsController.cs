@@ -49,11 +49,11 @@ namespace NZWalksAPI.Controllers
         // http://localhost:1234/api/regions/{id}
         [HttpGet]
         [Route("{id:Guid}")] // This attribute defines the route for this specific action method. The {id} token will be replaced with the actual ID value passed in the URL.
-        public IActionResult GetById([FromRoute] Guid id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             // var region = dbContext.Regions.Find(id); // Fetches a single region by its ID from the database.
 
-            var regionDomain = dbContext.Regions.FirstOrDefault(x => x.Id == id); // LINQ Code --> Fetches a single region by its ID from the database.
+            var regionDomain = await dbContext.Regions.FirstOrDefaultAsync(x => x.Id == id); // LINQ Code --> Fetches a single region by its ID from the database.
 
             if (regionDomain == null)
             {
@@ -75,7 +75,7 @@ namespace NZWalksAPI.Controllers
         }
 
         [HttpPost] // This attribute indicates that this method will respond to HTTP POST requests.
-        public IActionResult Create([FromBody] AddRegionRequestDto addRegionRequestDto)
+        public async Task<IActionResult> Create([FromBody] AddRegionRequestDto addRegionRequestDto)
         {
             // Map/Convert AddRegionRequestDto to Region Domain Model
             var regionDomainModel = new Region
@@ -87,9 +87,9 @@ namespace NZWalksAPI.Controllers
 
             // Use Domain Model to create a new region
 
-            dbContext.Regions.Add(regionDomainModel); // Add the new region to the database context.
+            await dbContext.Regions.AddAsync(regionDomainModel); // Add the new region to the database context.
 
-            dbContext.SaveChanges(); // Save the changes to the database.
+            await dbContext.SaveChangesAsync(); // Save the changes to the database.
 
             // Map/Convert Region Domain Model to Region DTO
 
@@ -108,10 +108,10 @@ namespace NZWalksAPI.Controllers
         // http://localhost:portnmber/api/region/{guid}
         [HttpPut] // This attribute indicates that this method will respond to HTTP PUT requests.
         [Route("{id:Guid}")] // This attribute defines the route for this specific action method. The {id} token will be replaced with the actual ID value passed in the URL.
-        public IActionResult Update([FromRoute] Guid id, [FromBody] UpdateRegionRequestDto updateRegionRequestDto )
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateRegionRequestDto updateRegionRequestDto )
         {
             // Fetch the region from the database
-            var regionDomainModel =  dbContext.Regions.FirstOrDefault(x => x.Id == id); // LINQ Code --> Fetches a single region by its ID from the database.
+            var regionDomainModel =  await dbContext.Regions.FirstOrDefaultAsync(x => x.Id == id); // LINQ Code --> Fetches a single region by its ID from the database.
 
             if (regionDomainModel == null)
             {
@@ -124,7 +124,7 @@ namespace NZWalksAPI.Controllers
             regionDomainModel.Name = updateRegionRequestDto.Name;
             regionDomainModel.RegionImageUrl = updateRegionRequestDto.RegionImageUrl;
 
-            dbContext.SaveChanges(); // Save the changes to the database.
+            await dbContext.SaveChangesAsync(); // Save the changes to the database.
 
             // Map/Convert Region Domain Model to Region DTO
 
@@ -141,9 +141,9 @@ namespace NZWalksAPI.Controllers
 
         [HttpDelete] // This attribute indicates that this method will respond to HTTP DELETE requests.
         [Route("{id:guid}")] // This attribute defines the route for this specific action method. The {id} token will be replaced with the actual ID value passed in the URL.
-        public IActionResult Delete([FromRoute] Guid id)
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            var regionDomainModel =  dbContext.Regions.FirstOrDefault(x => x.Id == id);
+            var regionDomainModel = await dbContext.Regions.FirstOrDefaultAsync(x => x.Id == id);
 
             if(regionDomainModel == null)
             {
@@ -151,7 +151,7 @@ namespace NZWalksAPI.Controllers
             }
 
             dbContext.Regions.Remove(regionDomainModel); // Remove the region from the database context.
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
 
             // Map/Convert Region Domain Model to Region DTO
 
