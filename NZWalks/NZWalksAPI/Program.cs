@@ -15,7 +15,7 @@ builder.Services.AddDbContext<NZWalksDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksConnectionString")));
 
 // Register other repositories or services as needed
-builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>(); 
+builder.Services.AddScoped<IRegionRepository, InmemoryRegionRepository>(); 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

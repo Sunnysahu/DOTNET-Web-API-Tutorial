@@ -430,4 +430,18 @@ In the `RegionsController`, inject the `IRegionRepository` instead of `NZWalksDb
 1. Now, you can use the `IRegionRepository` in your controller to perform CRUD operations on regions without directly accessing the `NZWalksDbContext`. This promotes separation of concerns and makes your code cleaner and more maintainable.
 1. You can now implement other methods like `GetByIdAsync`, `AddAsync`, `UpdateAsync`, and `DeleteAsync` in the `SQLRegionRepository` class, following the same pattern as shown above.
 1. You can also create similar repositories for other domain models like `Difficulty` and `Walk` by following the same steps.
+
+EXTRA : 
+- Now our `Controller` calls the `Repository` and `Repository` calls the `DbContext`. This is called the **`Repository Pattern`**. 
+- Now you can switch the `dbContext` to any other database like `MongoDB`, `PostgreSQL`, etc. without changing the `Controller` code. This is called **`Loose Coupling`**.
+- You can also create a `MockRepository` for testing purposes without changing the `Controller` code. This is called **`Dependency Injection`**.
+
+Now, Let's say business decides no to use `SQL Server` but to use `InMemoryDataBase`. 
+
+To demonstate create a another concreate implemetation of the `IRegionRepository` interface called `InMemoryRegionRepository.cs`.
+
+- Create a new class `InMemoryRegionRepository.cs` inside the `Repositories` folder.
+- Implement the `IRegionRepository` interface in the `InMemoryRegionRepository` class.
+    > use `ctrl` + `.` to import the interface and use the option `Implement all Method explicitely`. 
+- 
 ### 12. AutoMapper
