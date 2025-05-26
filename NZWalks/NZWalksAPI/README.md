@@ -442,6 +442,29 @@ To demonstate create a another concreate implemetation of the `IRegionRepository
 
 - Create a new class `InMemoryRegionRepository.cs` inside the `Repositories` folder.
 - Implement the `IRegionRepository` interface in the `InMemoryRegionRepository` class.
-    > use `ctrl` + `.` to import the interface and use the option `Implement all Method explicitely`. 
-- 
+    > use `ctrl` + `.` to import the interface and use the option `Implement all Method explicitely`.  
+    ```
+     return Task.FromResult(new List<Region>()
+            {
+                new Region()
+                {
+                    Id = Guid.NewGuid(),
+                    Code = "NI",
+                    Name = "North Island",
+                    RegionImageUrl = "https://example.com/north-island.jpg"
+                },
+                new Region()
+                {
+                    Id = Guid.NewGuid(),
+                    Code = "SI",
+                    Name = "South Island",
+                    RegionImageUrl = "https://example.com/south-island.jpg"
+                }
+            });
+    ```
+- Replace the IRegionRepository with the InMemoryRegionRepository in the Program.cs file.
+    ```
+    builder.Services.AddScoped<IRegionRepository, InMemoryRegionRepository>();
+    ```
+- Done and now roll it back as it for a Demonstration purpose only.
 ### 12. AutoMapper
