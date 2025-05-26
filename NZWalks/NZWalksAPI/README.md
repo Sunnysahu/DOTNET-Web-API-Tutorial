@@ -276,6 +276,12 @@ var dto = new EmployeeDto
 
 <img src="./Assets/Repository Pattern.jpg" alt="My Image" />
 
+### Benifits
+- Decoupling business logic from data access logic.
+- Promotes cleaner code and better organization.
+- Easier to manage and maintain data access logic.
+- Performs CRUD operations without exposing the underlying data source details.
+- Multiple Data Sources: Can work with different data sources (e.g., SQL, NoSQL) without changing the business logic.
 
 - Design pattern to separate the data access layer from the application.
 - Provides interface without exposing implementation. 
