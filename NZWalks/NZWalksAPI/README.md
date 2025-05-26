@@ -294,6 +294,76 @@ var dto = new EmployeeDto
 
 ### 4. Service Layer or Controller – Uses the repository to perform operations.
 
+## 🔸 Example in C# (.NET Core)
 
+### 1. Model :
+
+```
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+```
+
+### 2. IRepository Interface :
+```
+public interface IRepository<T> where T : class
+{
+    IEnumerable<T> GetAll();
+    T GetById(int id);
+    void Add(T entity);
+    void Update(T entity);
+    void Delete(T entity);
+}
+```
+
+### 3. Repository Implementation :
+```
+public class Repository<T> : IRepository<T> where T : class
+{
+    private readonly DbContext _context;
+    private readonly DbSet<T> _dbSet;
+
+    public Repository(DbContext context)
+    {
+        _context = context;
+        _dbSet = context.Set<T>();
+    }
+
+    public IEnumerable<T> GetAll() => _dbSet.ToList();
+
+    public T GetById(int id) => _dbSet.Find(id);
+
+    public void Add(T entity) => _dbSet.Add(entity);
+
+    public void Update(T entity) => _dbSet.Update(entity);
+
+    public void Delete(T entity) => _dbSet.Remove(entity);
+}
+```
+
+### 4. Usage in Service or Controller :
+```
+public class ProductService
+{
+    private readonly IRepository<Product> _productRepo;
+
+    public ProductService(IRepository<Product> productRepo)
+    {
+        _productRepo = productRepo;
+    }
+
+    public void CreateProduct(Product product)
+    {
+        _productRepo.Add(product);
+    }
+
+    public IEnumerable<Product> GetAllProducts()
+    {
+        return _productRepo.GetAll();
+    }
+}
+```
 
 ### 12. AutoMapper
