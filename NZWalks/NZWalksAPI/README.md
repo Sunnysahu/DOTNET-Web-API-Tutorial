@@ -266,4 +266,34 @@ var dto = new EmployeeDto
 
 
 
+### 12. Repository Pattern
+
+> The Repository Pattern is a design pattern used in software development, especially in .NET applications, to abstract the data access logic and centralize data operations.
+
+## ✅ Definition:
+> The Repository Pattern separates the business logic from the data access logic by abstracting the interaction with the data source (like a database) into a separate repository class.
+
+
+<img src="./Assets/Repository Pattern.jpg" alt="My Image" />
+
+
+- Design pattern to separate the data access layer from the application.
+- Provides interface without exposing implementation. 
+- Helps create abstraction.
+- Separation of concerns (clean architecture)
+- Easier to test (e.g., with mock repositories)
+- Helps manage data access logic in one place
+- Simplifies unit of work and transaction management
+
+## 🔹Structure Overview:
+### 1. Model (Entity) – Represents the data.
+
+### 2. IRepository (Interface) – Defines methods like Add, Get, Update, Delete.
+
+### 3. Repository (Implementation) – Implements IRepository and interacts with the database (e.g., using EF Core).
+
+### 4. Service Layer or Controller – Uses the repository to perform operations.
+
+
+
 ### 12. AutoMapper
