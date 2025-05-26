@@ -372,4 +372,13 @@ public class ProductService
 }
 ```
 
+Steps yo Do it in the Project:
+1. Create a folder named `Repositories`.
+1. Create an interface `IRegionRepository.cs` inside the `Repositories` folder.
+1. Define the methods/defination you want to implement in the repository, such as `GetAllAsync`, `GetByIdAsync`, `AddAsync`, `UpdateAsync`, and `DeleteAsync`.
+1. Create a class `SQLRegionRepository.cs` that implements/Inherit the `IRegionRepository` interface.
+
+    > use `ctrl` + `.` to import the interface.
+1. Inject the `NZWalksDbContext` into the `RegionRepository` constructor.
+1. 
 ### 12. AutoMapper
